@@ -9,6 +9,7 @@ import 'package:diary/features/secret_entry_code/bloc/password_event.dart';
 import 'package:diary/features/secret_entry_code/bloc/password_state.dart';
 import 'package:diary/features/secret_entry_code/data/repositories/secret_code_repository.dart';
 import 'package:diary/features/secret_entry_code/screens/secret_code.dart';
+import 'package:diary/features/settings/screens/settings_list.dart';
 import 'package:diary/features/todo_list/todo_list.dart';
 import 'package:diary/features/todo_list/bloc/todo_list_bloc.dart';
 import 'package:diary/features/calendar/calendar.dart';
@@ -57,18 +58,16 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
     final notesListBloc = BlocProvider.of<NotesListBloc>(context);
+    final double? sizeIcon = 30;
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                AutoRouter.of(context).push(const SettingsRoute());
-              },
-              icon: const Icon(Icons.menu)),
           title: Text(selectedTab.index == 0
               ? S.of(context).notes
               : selectedTab.index == 1
                   ? S.of(context).tasks
-                  : S.of(context).calendar),
+                  : selectedTab.index == 2
+                      ? S.of(context).calendar
+                      : S.of(context).settings),
           centerTitle: true,
           actions: [
             BlocBuilder<NotesListBloc, NotesListState>(
@@ -103,34 +102,45 @@ class HomeView extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: NavigationBar(
-          backgroundColor: Theme.of(context).colorScheme.surface,
+          backgroundColor: Colors.white30,
+          indicatorColor: Theme.of(context).colorScheme.surface,
+          surfaceTintColor: Theme.of(context).colorScheme.surface,
           selectedIndex: selectedTab.index,
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
           onDestinationSelected: (index) {
             context.read<HomeCubit>().setTab(index);
           },
           destinations: <Widget>[
             NavigationDestination(
-              selectedIcon: const Icon(Icons.note_add),
-              icon: const Icon(Icons.note_add_outlined),
-              label: S.of(context).notes,
-            ),
-            NavigationDestination(
-              selectedIcon: const Icon(Icons.task),
-              icon: const Icon(Icons.task_outlined),
-              label: S.of(context).tasks,
-            ),
-            NavigationDestination(
-              selectedIcon: const Icon(Icons.calendar_month),
-              icon: const Icon(Icons.calendar_month_outlined),
-              label: S.of(context).calendar,
-            ),
-            const NavigationDestination(
-              icon: Icon(Icons.calendar_month_outlined),
+              selectedIcon: Icon(Icons.note_add, size: sizeIcon),
+              icon: Icon(
+                Icons.note_add_outlined,
+                size: sizeIcon,
+              ),
               label: "",
+              // label: S.of(context).notes,
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.task, size: sizeIcon),
+              icon: Icon(Icons.task_outlined, size: sizeIcon),
+              label: "",
+              // label: S.of(context).tasks,
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.calendar_month, size: sizeIcon),
+              icon: Icon(Icons.calendar_month_outlined, size: sizeIcon),
+              label: "",
+              // label: S.of(context).calendar,
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.settings, size: sizeIcon),
+              icon: Icon(Icons.settings_outlined, size: sizeIcon),
+              label: "",
+              // label: S.of(context).settings,
             ),
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: selectedTab.index == 0
             ? FloatingActionButton(
                 onPressed: () {
@@ -165,6 +175,7 @@ class HomeView extends StatelessWidget {
             NotesListPage(),
             TasksListPage(),
             CalendarPage(),
+            SettingsPage(),
           ],
         ));
   }

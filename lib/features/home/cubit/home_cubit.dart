@@ -18,6 +18,9 @@ class HomeCubit extends Cubit<HomeState> {
       case 2:
         tab = HomeTab.calendar;
         break;
+      case 3:
+        tab = HomeTab.settings;
+        break;
     }
     emit(HomeState(tab: tab));
   }

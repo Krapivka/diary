@@ -51,9 +51,15 @@ ThemeData lightTheme = ThemeData(
     // ),
     // iconTheme: IconThemeData(color: Palette.textLight),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: Palette.secondaryAccent),
+        shape: CircleBorder(), backgroundColor: Palette.primaryAccent),
     // fontFamily: _fontFamily,
-    textTheme: textTheme);
+
+    textTheme: textTheme,
+    navigationBarTheme: const NavigationBarThemeData(
+      iconTheme: WidgetStatePropertyAll(IconThemeData(
+        color: Palette.primaryAccent,
+      )),
+    ));
 
 ThemeData darkTheme = ThemeData(
     useMaterial3: true,
@@ -78,7 +84,12 @@ ThemeData darkTheme = ThemeData(
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: Palette.primaryAccent),
     //  fontFamily: _fontFamily,
-    textTheme: darkTextTheme);
+    textTheme: darkTextTheme,
+    navigationBarTheme: const NavigationBarThemeData(
+      iconTheme: WidgetStatePropertyAll(IconThemeData(
+        color: Palette.primaryAccent,
+      )),
+    ));
 
 
 //   useMaterial3: true,

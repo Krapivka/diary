@@ -49,7 +49,7 @@ void main() async {
 
   gds.loginWithGoogle();
 
-  //await sharedPreferences.setString(USER_PASSWORD, "1234");
+  print(await sharedPreferences.get(USER_PASSWORD));
 
   final taskRepository = TaskRepository(
     localDataSource:

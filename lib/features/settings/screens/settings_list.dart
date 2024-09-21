@@ -39,18 +39,12 @@ class SettingsPageView extends StatelessWidget {
         AutoRouter.of(context).push(const BackupRestoreRoute());
       }
     }, builder: (context, state) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(S.of(context).settings),
-          centerTitle: true,
-        ),
-        body: const Column(
-          children: [
-            BackupRestoreTile(),
-            SettingsList(),
-            SecretCodeTile(),
-          ],
-        ),
+      return const Column(
+        children: [
+          BackupRestoreTile(),
+          SettingsList(),
+          SecretCodeTile(),
+        ],
       );
     });
   }

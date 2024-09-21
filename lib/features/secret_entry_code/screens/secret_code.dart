@@ -32,7 +32,7 @@ class Selector extends StatelessWidget {
         return (state.isPasswordSet &&
                     state.status != PasswordStatus.validationSuccess) ||
                 (!state.isPasswordSet &&
-                    (state.status == PasswordStatus.settingPassword))
+                    (state.status == PasswordStatus.success))
             ? const PinCodeView()
             : const HomePage();
       },
@@ -90,9 +90,11 @@ class _PinCodeViewState extends State<PinCodeView> {
     return Scaffold(
       body: BlocConsumer<PasswordBloc, PasswordState>(
         listener: (context, state) {
-          if (state.status == PasswordStatus.validationSuccess) {
-            AutoRouter.of(context).pushNamed("/home");
+          if (state.status == PasswordStatus.validationSuccess ||
+              state.status == PasswordStatus.setPasswordSuccess) {
+            AutoRouter.of(context).replaceNamed("/home");
           }
+
           if (state.status == PasswordStatus.validationFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               AppSnackBar.show(
@@ -137,13 +139,11 @@ class _PinCodeViewState extends State<PinCodeView> {
                     ),
                   ),
                   onCompleted: (pin) {
-                    if (state.isPasswordSet &&
-                        state.status != PasswordStatus.validationSuccess) {
+                    if (state.isPasswordSet) {
                       context
                           .read<PasswordBloc>()
                           .add(ValidatePasswordEvent(pin));
-                    } else if (!state.isPasswordSet &&
-                        state.status == PasswordStatus.settingPassword) {
+                    } else {
                       context.read<PasswordBloc>().add(SetPasswordEvent(pin));
                     }
                   },

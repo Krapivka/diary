@@ -125,7 +125,7 @@ class NotificationService {
   }
 
   static Future<void> showTestNotification(body) async {
-    const String title = "Task Calendar";
+    const String title = "Diary";
     await showNotification(title: title, body: body);
   }
 

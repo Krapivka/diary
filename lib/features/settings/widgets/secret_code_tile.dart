@@ -44,8 +44,6 @@ class SecretCodeTile extends StatelessWidget {
                     activeColor: Palette.primaryAccent,
                     onChanged: (bool value) {
                       if (value) {
-                        BlocProvider.of<PasswordBloc>(context)
-                            .add(const SettingPasswordEvent());
                         AutoRouter.of(context).pushNamed("/");
                       } else {
                         BlocProvider.of<PasswordBloc>(context)

@@ -16,12 +16,6 @@ class SetPasswordEvent extends PasswordEvent {
   List<Object> get props => [password];
 }
 
-class SettingPasswordEvent extends PasswordEvent {
-  const SettingPasswordEvent();
-  @override
-  List<Object> get props => [];
-}
-
 class RemovePasswordEvent extends PasswordEvent {
   const RemovePasswordEvent();
 

@@ -1,10 +1,9 @@
 enum PasswordStatus {
   initial, // Начальное состояние
-  loading, // Процесс установки, удаления или проверки пароля
   success, // Успешное выполнение
   error, // Ошибка выполнения
-  settingPassword,
   validationSuccess, // Пароль успешно подтвержден
+  setPasswordSuccess,
   validationFailure, // Ошибка валидации пароля
 }
 

@@ -2,13 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:diary/core/domain/repositories/note_repository.dart';
 import 'package:diary/core/domain/repositories/task_repository.dart';
 import 'package:diary/features/calendar/bloc/bloc/calendar_bloc.dart';
+import 'package:diary/features/home/widgets/custom_nav_bar.dart';
 import 'package:diary/features/note_list/bloc/note_list_bloc.dart';
 import 'package:diary/features/note_list/note_list.dart';
-import 'package:diary/features/secret_entry_code/bloc/password_bloc.dart';
-import 'package:diary/features/secret_entry_code/bloc/password_event.dart';
-import 'package:diary/features/secret_entry_code/bloc/password_state.dart';
-import 'package:diary/features/secret_entry_code/data/repositories/secret_code_repository.dart';
-import 'package:diary/features/secret_entry_code/screens/secret_code.dart';
+
 import 'package:diary/features/settings/screens/settings_list.dart';
 import 'package:diary/features/todo_list/todo_list.dart';
 import 'package:diary/features/todo_list/bloc/todo_list_bloc.dart';
@@ -18,7 +15,6 @@ import 'package:diary/generated/l10n.dart';
 import 'package:diary/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:googleapis/content/v2_1.dart';
 
 import '../settings/data/repository/abstract_settings_repository.dart';
 
@@ -58,7 +54,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
     final notesListBloc = BlocProvider.of<NotesListBloc>(context);
-    final double? sizeIcon = 30;
+    const double? sizeIcon = 30;
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedTab.index == 0
@@ -101,45 +97,9 @@ class HomeView extends StatelessWidget {
             )
           ],
         ),
-        bottomNavigationBar: NavigationBar(
-          backgroundColor: Colors.white30,
-          indicatorColor: Theme.of(context).colorScheme.surface,
-          surfaceTintColor: Theme.of(context).colorScheme.surface,
-          selectedIndex: selectedTab.index,
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-          onDestinationSelected: (index) {
-            context.read<HomeCubit>().setTab(index);
-          },
-          destinations: <Widget>[
-            NavigationDestination(
-              selectedIcon: Icon(Icons.note_add, size: sizeIcon),
-              icon: Icon(
-                Icons.note_add_outlined,
-                size: sizeIcon,
-              ),
-              label: "",
-              // label: S.of(context).notes,
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.task, size: sizeIcon),
-              icon: Icon(Icons.task_outlined, size: sizeIcon),
-              label: "",
-              // label: S.of(context).tasks,
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.calendar_month, size: sizeIcon),
-              icon: Icon(Icons.calendar_month_outlined, size: sizeIcon),
-              label: "",
-              // label: S.of(context).calendar,
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.settings, size: sizeIcon),
-              icon: Icon(Icons.settings_outlined, size: sizeIcon),
-              label: "",
-              // label: S.of(context).settings,
-            ),
-          ],
-        ),
+        resizeToAvoidBottomInset: false,
+        bottomNavigationBar:
+            CustomNavigationBar(selectedTab: selectedTab, sizeIcon: sizeIcon),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: selectedTab.index == 0
             ? FloatingActionButton(

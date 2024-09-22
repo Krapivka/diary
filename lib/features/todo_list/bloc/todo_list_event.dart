@@ -51,3 +51,11 @@ class TapTaskCardEvent extends TasksListEvent {
   @override
   List<Object?> get props => [id];
 }
+
+class ChangeFilterEvent extends TasksListEvent {
+  const ChangeFilterEvent({required this.filter});
+  final TaskFilter filter;
+
+  @override
+  List<Object?> get props => [filter];
+}

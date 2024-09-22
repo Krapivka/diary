@@ -7,6 +7,11 @@ abstract class PasswordEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class SetSecretCodeEvent extends PasswordEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class SetPasswordEvent extends PasswordEvent {
   final String password;
 

@@ -4,7 +4,7 @@ enum HomeTab { note, tasks, calendar, settings }
 
 class HomeState extends Equatable {
   const HomeState({
-    this.tab = HomeTab.tasks,
+    this.tab = HomeTab.note,
   });
 
   final HomeTab tab;

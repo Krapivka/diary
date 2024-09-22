@@ -29,16 +29,16 @@ ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
-      surface: Palette.backgroundLight,
+      surface: Palette.primaryLight,
       primary: Palette.primaryLight,
-      secondary: Palette.secondaryLight,
+      secondary: Palette.primaryAccent,
     ),
     textSelectionTheme: const TextSelectionThemeData(
       cursorColor: Palette.secondaryDark,
       selectionHandleColor: Palette.primaryAccent,
       selectionColor: Palette.primaryAccent,
     ),
-    scaffoldBackgroundColor: Palette.backgroundLight,
+    //scaffoldBackgroundColor: Palette.backgroundLight,
 
     // appBarTheme: const AppBarTheme(
     //   color: Palette.primaryLight,
@@ -67,7 +67,7 @@ ThemeData darkTheme = ThemeData(
     colorScheme: const ColorScheme.dark(
       surface: Palette.backgroundDark,
       primary: Palette.primaryDark,
-      secondary: Palette.secondaryDark,
+      secondary: Palette.primaryAccent,
     ),
     textSelectionTheme: const TextSelectionThemeData(
       cursorColor: Palette.secondaryLight,
@@ -77,15 +77,13 @@ ThemeData darkTheme = ThemeData(
     // appBarTheme: const AppBarTheme(
     //   color: Palette.primaryDark,
     // ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Palette.primaryDark,
-    ),
     appBarTheme: const AppBarTheme(backgroundColor: Palette.backgroundDark),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: Palette.primaryAccent),
+        shape: CircleBorder(), backgroundColor: Palette.primaryAccent),
     //  fontFamily: _fontFamily,
     textTheme: darkTextTheme,
     navigationBarTheme: const NavigationBarThemeData(
+      backgroundColor: Palette.backgroundDark,
       iconTheme: WidgetStatePropertyAll(IconThemeData(
         color: Palette.primaryAccent,
       )),

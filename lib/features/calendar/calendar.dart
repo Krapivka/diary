@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:diary/core/data/models/task.dart';
 import 'package:diary/core/services/ads/yandex_ads/banner/banner_ad.dart';
@@ -122,8 +123,19 @@ class _CalendarPageViewState extends State<CalendarPageView> {
                 child: BlocBuilder<CalendarBloc, CalendarState>(
                   builder: (context, state) {
                     if (state.tasksInSelectedDay.isEmpty) {
-                      return Center(
-                        child: Text(S.of(context).emptyDayCalendar),
+                      return Padding(
+                        padding: const EdgeInsets.all(50.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/images/calendar.svg',
+                                semanticsLabel: 'ToDo'),
+                            Text(
+                              S.of(context).emptyDayCalendar,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       );
                     }
                     return ListView.builder(

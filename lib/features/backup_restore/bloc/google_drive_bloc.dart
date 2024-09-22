@@ -73,7 +73,6 @@ class GoogleDriveBloc extends Bloc<GoogleDriveEvent, GoogleDriveState> {
       GoogleDriveRestore event, Emitter<GoogleDriveState> emit) async {
     emit(state.copyWith(status: GoogleDriveStatus.loading));
     try {
-      //TODO: НАписать метод восстановления данных
       await _googleDriveService.restoreBackupFromGoogleDrive();
       emit(state.copyWith(
         status: GoogleDriveStatus.downloaded,

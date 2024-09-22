@@ -21,6 +21,7 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
             listTaskModel: [],
             selectedTaskId: [],
             sortedListTaskModel: [],
+            taskFilter: TaskFilter.all,
           ),
         ) {
     on<LoadTasksListEvent>(_onLoadTasksList);
@@ -29,6 +30,7 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
     on<TapTaskCardEvent>(_onTapTaskCardEvent);
     on<DeleteTaskTasksListEvent>(_onDeleteTask);
     on<ChangeTaskCompleteListEvent>(_onChangeTaskComplete);
+    on<ChangeFilterEvent>(_onChangeFilter);
   }
   final AbstractTaskRepository _taskRepository;
   final AbstractSettingsRepository _settingsRepository;
@@ -38,12 +40,32 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
     emit(state.copyWith(taskListStatus: TasksListStatus.loading));
     final listTaskModel = await _taskRepository.getAllTasks();
     listTaskModel.fold(
-      (failure) =>
-          emit(state.copyWith(taskListStatus: TasksListStatus.failure)),
-      (result) => emit(state.copyWith(
+        (failure) =>
+            emit(state.copyWith(taskListStatus: TasksListStatus.failure)),
+        (result) {
+      List<TaskModel> filteredTasks = _filterTasks(result as List<TaskModel>);
+      emit(state.copyWith(
           taskListStatus: TasksListStatus.loaded,
-          listTaskModel: sortTasksByNearestTask(result as List<TaskModel>))),
-    );
+          listTaskModel:
+              sortTasksByNearestTask(filteredTasks as List<TaskModel>)));
+    });
+  }
+
+  _onChangeFilter(ChangeFilterEvent event, Emitter<TasksListState> emit) {
+    emit(state.copyWith(taskFilter: event.filter));
+    add(const LoadTasksListEvent());
+  }
+
+  List<TaskModel> _filterTasks(List<TaskModel> tasks) {
+    switch (state.taskFilter) {
+      case TaskFilter.completed:
+        return tasks.where((task) => task.isCompleted).toList();
+      case TaskFilter.uncompleted:
+        return tasks.where((task) => !task.isCompleted).toList();
+      case TaskFilter.all:
+      default:
+        return tasks;
+    }
   }
 
   _onSearchTask(
@@ -54,15 +76,17 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
         (failure) =>
             emit(state.copyWith(taskListStatus: TasksListStatus.failure)),
         (result) {
+      final filteredTasks = _filterTasks(result as List<TaskModel>);
       if (result.isEmpty || event.query == '') {
         emit(state.copyWith(
             taskListStatus: TasksListStatus.loaded,
-            listTaskModel: sortTasksByNearestTask(result as List<TaskModel>)));
+            listTaskModel:
+                sortTasksByNearestTask(filteredTasks as List<TaskModel>)));
       } else {
         final query = event.query;
 
         debugPrint("Search: ${event.query}");
-        final sortedList = result
+        final sortedList = filteredTasks
             .where((task) =>
                 (task.title.toLowerCase().contains(query.toLowerCase()) ||
                     (task.description != null &&
@@ -70,13 +94,13 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
                             .toLowerCase()
                             .contains(query.toLowerCase()))))
             .toList();
-
         emit(
           state.copyWith(
               taskListStatus: TasksListStatus.searchLoaded,
               sortedListTaskModel:
                   sortTasksByNearestTask(sortedList as List<TaskModel>)),
         );
+        // add(const LoadTasksListEvent());
       }
     });
   }

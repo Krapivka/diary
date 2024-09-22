@@ -8,9 +8,17 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
 
   PasswordBloc(this._secretCodeRepository) : super(PasswordState()) {
     on<SetPasswordEvent>(_onSetPassword);
+    on<SetSecretCodeEvent>(_onSetSecretCode);
     on<RemovePasswordEvent>(_onRemovePassword);
     on<ValidatePasswordEvent>(_onValidatePassword);
     on<CheckExistingPasswordEvent>(_onCheckExistingPassword);
+  }
+
+  Future<void> _onSetSecretCode(
+      SetSecretCodeEvent event, Emitter<PasswordState> emit) async {
+    emit(state.copyWith(
+      status: PasswordStatus.settingPassword,
+    ));
   }
 
   Future<void> _onSetPassword(
@@ -20,9 +28,6 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
     secretCode
         .fold((failure) => emit(state.copyWith(status: PasswordStatus.error)),
             (value) {
-      emit(state.copyWith(
-        status: PasswordStatus.setPasswordSuccess,
-      ));
       emit(state.copyWith(
         status: PasswordStatus.success,
         isPasswordSet: true,
@@ -50,7 +55,6 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         .fold((failure) => emit(state.copyWith(status: PasswordStatus.error)),
             (value) {
       if (value) {
-        emit(state.copyWith(status: PasswordStatus.validationSuccess));
         emit(state.copyWith(status: PasswordStatus.success));
       } else {
         emit(state.copyWith(status: PasswordStatus.validationFailure));
@@ -67,6 +71,7 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         if (value != null && value.isNotEmpty) {
           emit(state.copyWith(
             isPasswordSet: true,
+            status: PasswordStatus.validation,
           ));
         } else {
           emit(state.copyWith(

@@ -7,6 +7,7 @@ import 'package:diary/features/secret_entry_code/bloc/password_event.dart';
 import 'package:diary/features/secret_entry_code/bloc/password_state.dart';
 import 'package:diary/features/secret_entry_code/data/repositories/secret_code_repository.dart';
 import 'package:diary/generated/l10n.dart';
+import 'package:diary/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,9 +31,9 @@ class Selector extends StatelessWidget {
     return BlocBuilder<PasswordBloc, PasswordState>(
       builder: (context, state) {
         return (state.isPasswordSet &&
-                    state.status != PasswordStatus.validationSuccess) ||
+                    state.status == PasswordStatus.validation) ||
                 (!state.isPasswordSet &&
-                    (state.status == PasswordStatus.success))
+                    (state.status == PasswordStatus.settingPassword))
             ? const PinCodeView()
             : const HomePage();
       },
@@ -90,9 +91,9 @@ class _PinCodeViewState extends State<PinCodeView> {
     return Scaffold(
       body: BlocConsumer<PasswordBloc, PasswordState>(
         listener: (context, state) {
-          if (state.status == PasswordStatus.validationSuccess ||
-              state.status == PasswordStatus.setPasswordSuccess) {
-            AutoRouter.of(context).replaceNamed("/home");
+          if (state.status == PasswordStatus.success) {
+            AutoRouter.of(context).pushAndPopUntil(const HomeRoute(),
+                predicate: (Route<dynamic> route) => false);
           }
 
           if (state.status == PasswordStatus.validationFailure) {

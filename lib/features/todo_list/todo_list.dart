@@ -40,6 +40,56 @@ class _TasksListViewState extends State<TasksListView> {
               isSticky: true,
             ),
             const TaskSearch(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: BlocBuilder<TasksListBloc, TasksListState>(
+                builder: (context, state) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          bloc.add(
+                              const ChangeFilterEvent(filter: TaskFilter.all));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: state.taskFilter == TaskFilter.all
+                              ? Theme.of(context).colorScheme.secondary
+                              : Theme.of(context).colorScheme.primary,
+                        ),
+                        child: Text("All"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          bloc.add(const ChangeFilterEvent(
+                              filter: TaskFilter.completed));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              state.taskFilter == TaskFilter.completed
+                                  ? Theme.of(context).colorScheme.secondary
+                                  : Theme.of(context).colorScheme.primary,
+                        ),
+                        child: Text("Completed"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          bloc.add(const ChangeFilterEvent(
+                              filter: TaskFilter.uncompleted));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              state.taskFilter == TaskFilter.uncompleted
+                                  ? Theme.of(context).colorScheme.secondary
+                                  : Theme.of(context).colorScheme.primary,
+                        ),
+                        child: Text("Uncompleted"),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
             Expanded(
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.7,

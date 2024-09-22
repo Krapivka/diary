@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diary/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -42,7 +43,8 @@ class NoteView extends StatelessWidget {
     bloc.add(NoteLoadEvent());
     return BlocConsumer<NoteBloc, NoteState>(listener: (context, state) {
       if (state.noteStatus == NoteStatus.saved) {
-        AutoRouter.of(context).pushNamed("/");
+        AutoRouter.of(context).pushAndPopUntil(const HomeRoute(),
+            predicate: (Route<dynamic> route) => false);
       }
       if (state.noteStatus == NoteStatus.loading) {
         noteTitleController.text = bloc.state.title;
@@ -56,7 +58,9 @@ class NoteView extends StatelessWidget {
                   ? IconButton(
                       onPressed: () async {
                         bloc.add(NoteClearEvent());
-                        AutoRouter.of(context).pushNamed("/");
+                        AutoRouter.of(context).pushAndPopUntil(
+                            const HomeRoute(),
+                            predicate: (Route<dynamic> route) => false);
                       },
                       icon: const Icon(
                         Icons.delete,

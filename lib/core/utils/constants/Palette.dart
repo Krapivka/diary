@@ -18,7 +18,7 @@ class Palette {
   static const Color textDark = Color.fromARGB(255, 247, 247, 247);
 
   //accent
-  static const Color primaryAccent = Color.fromARGB(255, 107, 99, 255);
+  static const Color primaryAccent = Color(0xFF6B63FF);
   static const Color secondaryAccent = Color.fromARGB(255, 106, 212, 221);
 
   //calendar

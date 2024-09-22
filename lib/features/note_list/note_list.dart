@@ -8,6 +8,7 @@ import 'package:diary/generated/l10n.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class NotesListPage extends StatelessWidget {
   const NotesListPage({super.key});
@@ -67,16 +68,20 @@ class _NotesListViewState extends State<NotesListView> {
                           },
                         );
                       } else {
-                        return Center(
-                            child: Padding(
+                        return Padding(
                           padding: const EdgeInsets.all(50.0),
-                          child: Align(
-                            child: Text(
-                              S.of(context).emptyNoteList,
-                              textAlign: TextAlign.center,
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset('assets/images/notes.svg',
+                                  semanticsLabel: 'ToDo'),
+                              Text(
+                                S.of(context).emptyNoteList,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                        ));
+                        );
                       }
                     }
                     if (state.noteListStatus == NotesListStatus.searchLoaded) {

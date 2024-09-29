@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutApp": MessageLookupByLibrary.simpleMessage("About app"),
         "addTask": MessageLookupByLibrary.simpleMessage("Add task"),
         "addTaskButton": MessageLookupByLibrary.simpleMessage("Add task"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
         "appVersionN": m0,
         "authorN": m1,
         "backup": MessageLookupByLibrary.simpleMessage("Backup"),
@@ -53,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Select themes"),
         "chooseYourLanguage":
             MessageLookupByLibrary.simpleMessage("Select a language:"),
+        "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "createABackup":
             MessageLookupByLibrary.simpleMessage("Create a backup"),
         "darkThemeModeName": MessageLookupByLibrary.simpleMessage("Dark"),
@@ -109,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "selectColor": MessageLookupByLibrary.simpleMessage("Select color"),
+        "setASecretCode":
+            MessageLookupByLibrary.simpleMessage("Set a secret code"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "startTyping": MessageLookupByLibrary.simpleMessage("Start typing"),
         "systemThemeModeName": MessageLookupByLibrary.simpleMessage("System"),
@@ -129,6 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleNote": MessageLookupByLibrary.simpleMessage("Title"),
         "turnsN": m5,
         "twoWeeks": MessageLookupByLibrary.simpleMessage("2 weeks"),
+        "uncompleted": MessageLookupByLibrary.simpleMessage("Uncompleted"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Update task"),
         "week": MessageLookupByLibrary.simpleMessage("week"),
         "welcomeMessageInInfo": MessageLookupByLibrary.simpleMessage(

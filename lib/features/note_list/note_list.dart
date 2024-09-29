@@ -100,9 +100,18 @@ class _NotesListViewState extends State<NotesListView> {
                         );
                       } else {
                         return Center(
-                            child: Text(
-                          S.of(context).theNoteWasNotFound,
-                        ));
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset('assets/images/notes.svg',
+                                  semanticsLabel: 'ToDo'),
+                              Text(
+                                S.of(context).theNoteWasNotFound,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        );
                       }
                     }
                     return const SizedBox();

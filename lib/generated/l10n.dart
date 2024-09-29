@@ -710,6 +710,46 @@ class S {
       args: [],
     );
   }
+
+  /// `All`
+  String get all {
+    return Intl.message(
+      'All',
+      name: 'all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get completed {
+    return Intl.message(
+      'Completed',
+      name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uncompleted`
+  String get uncompleted {
+    return Intl.message(
+      'Uncompleted',
+      name: 'uncompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set a secret code`
+  String get setASecretCode {
+    return Intl.message(
+      'Set a secret code',
+      name: 'setASecretCode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

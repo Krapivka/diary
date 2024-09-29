@@ -1,5 +1,7 @@
 import 'package:diary/core/domain/repositories/note_repository.dart';
 import 'package:diary/core/domain/repositories/task_repository.dart';
+import 'package:diary/core/services/ads/yandex_ads/open_ad/app_open_ad_manager.dart';
+import 'package:diary/core/services/ads/yandex_ads/open_ad/bloc/app_open_ad_bloc.dart';
 import 'package:diary/core/services/google_drive/google_drive_service.dart';
 
 import 'package:diary/core/utils/theme/theme.dart';
@@ -16,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 
 late final Size windowSize;
 
@@ -27,7 +30,7 @@ class App extends StatelessWidget {
   final AbstractSecretCodeRepository secretCodeRepository;
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
-  static const String name = 'Task Calendar';
+  static const String name = 'My Diary';
   static const Color mainColor = Colors.deepPurple;
 
   const App({
@@ -69,6 +72,11 @@ class App extends StatelessWidget {
                   RepositoryProvider.of<AbstractSecretCodeRepository>(context))
                 ..add(CheckExistingPasswordEvent()),
             ),
+            // BlocProvider(
+            //   create: (context) =>
+            //       AppOpenAdBloc(GetIt.I.get<AppOpenAdManager>())
+            //         ..add(LoadAppOpenAdEvent()),
+            // ),
             BlocProvider(
                 create: (context) => SettingsBloc(
                     settingsRepository:
@@ -117,7 +125,7 @@ class _AppViewState extends State<AppView> {
           supportedLocales: S.delegate.supportedLocales,
           locale: Locale(state.language),
           debugShowCheckedModeBanner: false,
-          title: 'Task Calendar',
+          title: 'My Diary',
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: state.theme.themeMode,

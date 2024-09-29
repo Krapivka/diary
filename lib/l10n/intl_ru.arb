@@ -64,5 +64,9 @@
   "restoreCompletedSuccessfully": "Восстановление завершено успешно",
   "loggedOutSuccessfully": "Успешно вышли из системы",
   "errorN": "Ошибка: {errorMessage}",
-  "thePasswordWasEnteredIncorrectly": "Пароль был введен неправильно. Повторите попытку"
+  "thePasswordWasEnteredIncorrectly": "Пароль был введен неправильно. Повторите попытку",
+  "all": "Все",
+  "completed": "Завершенные",
+  "uncompleted": "Текущие",
+  "setASecretCode": "Установить секретный код"
 }

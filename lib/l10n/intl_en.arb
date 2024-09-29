@@ -64,5 +64,9 @@
   "restoreCompletedSuccessfully": "Restore completed successfully",
   "loggedOutSuccessfully": "Logged out successfully",
   "errorN": "Error: {errorMessage}",
-  "thePasswordWasEnteredIncorrectly": "The password was entered incorrectly. Try again"
+  "thePasswordWasEnteredIncorrectly": "The password was entered incorrectly. Try again",
+  "all": "All",
+  "completed": "Completed",
+  "uncompleted": "Uncompleted",
+  "setASecretCode": "Set a secret code"
 }

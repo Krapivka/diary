@@ -123,17 +123,16 @@ class _CalendarPageViewState extends State<CalendarPageView> {
                 child: BlocBuilder<CalendarBloc, CalendarState>(
                   builder: (context, state) {
                     if (state.tasksInSelectedDay.isEmpty) {
-                      return Padding(
-                        padding: const EdgeInsets.all(50.0),
+                      return Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset('assets/images/calendar.svg',
                                 semanticsLabel: 'ToDo'),
-                            Text(
-                              S.of(context).emptyDayCalendar,
-                              textAlign: TextAlign.center,
-                            ),
+                            // Text(
+                            //   S.of(context).emptyDayCalendar,
+                            //   textAlign: TextAlign.center,
+                            // ),
                           ],
                         ),
                       );

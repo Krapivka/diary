@@ -1,7 +1,8 @@
+import 'package:diary/core/services/ads/ads_config.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
 class AppOpenAdManager {
-  final _adUnitId = 'R-M-6626566-2';
+  final _adUnitId = AdsConfig.appOpenAdId;
   var _loadingInProgress = false;
   late final _adRequestConfiguration =
       AdRequestConfiguration(adUnitId: _adUnitId);

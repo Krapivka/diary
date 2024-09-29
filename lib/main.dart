@@ -1,3 +1,4 @@
+import 'package:diary/core/services/ads/yandex_ads/open_ad/app_open_ad_manager.dart';
 import 'package:diary/features/secret_entry_code/data/datasources/secret_code_local_data_source.dart';
 import 'package:diary/features/secret_entry_code/data/repositories/secret_code_repository_impl.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -24,14 +25,15 @@ void main() async {
   //initializ mob ads
   MobileAds.initialize();
 
+  GetIt.I.registerSingleton<AppOpenAdManager>(AppOpenAdManager());
+  GetIt.I<AppOpenAdManager>().loadAppOpenAd();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((app) => debugPrint(app.options.toString()));
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   await analytics.logAppOpen();
   //loading open ad
-  // GetIt.I.registerSingleton<AppOpenAdManager>(AppOpenAdManager());
-  // GetIt.I<AppOpenAdManager>().loadAppOpenAd();
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   GetIt.I.registerSingletonAsync<PackageInfo>(() async {

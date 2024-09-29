@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diary/core/domain/repositories/note_repository.dart';
 import 'package:diary/core/domain/repositories/task_repository.dart';
+import 'package:diary/core/services/ads/yandex_ads/open_ad/bloc/app_open_ad_bloc.dart';
 import 'package:diary/features/calendar/bloc/bloc/calendar_bloc.dart';
 import 'package:diary/features/home/widgets/custom_nav_bar.dart';
 import 'package:diary/features/note_list/bloc/note_list_bloc.dart';
@@ -55,6 +56,7 @@ class HomeView extends StatelessWidget {
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
     final notesListBloc = BlocProvider.of<NotesListBloc>(context);
     const double? sizeIcon = 30;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedTab.index == 0

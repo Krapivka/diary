@@ -7,6 +7,7 @@ import 'package:diary/features/secret_entry_code/bloc/password_event.dart';
 import 'package:diary/features/secret_entry_code/bloc/password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:diary/generated/l10n.dart';
 
 class SecretCodeTile extends StatelessWidget {
   const SecretCodeTile({
@@ -21,14 +22,14 @@ class SecretCodeTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const Row(
+            Row(
               children: [
-                Icon(Icons.security),
-                SizedBox(
+                const Icon(Icons.security),
+                const SizedBox(
                   width: 16,
                 ),
                 AutoSizeText(
-                  "Установить секретный код",
+                  S.of(context).setASecretCode,
                   minFontSize: 12,
                   maxFontSize: 16,
                   maxLines: 1,

@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutApp": MessageLookupByLibrary.simpleMessage("О приложении"),
         "addTask": MessageLookupByLibrary.simpleMessage("Добавить задачу"),
         "addTaskButton": MessageLookupByLibrary.simpleMessage("Создать"),
+        "all": MessageLookupByLibrary.simpleMessage("Все"),
         "appVersionN": m0,
         "authorN": m1,
         "backup": MessageLookupByLibrary.simpleMessage("Резервная копия"),
@@ -53,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Выбор темы"),
         "chooseYourLanguage":
             MessageLookupByLibrary.simpleMessage("Выберите язык:"),
+        "completed": MessageLookupByLibrary.simpleMessage("Завершенные"),
         "createABackup":
             MessageLookupByLibrary.simpleMessage("Создать резервную копию"),
         "darkThemeModeName": MessageLookupByLibrary.simpleMessage("Темная"),
@@ -109,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "search": MessageLookupByLibrary.simpleMessage("Поиск"),
         "selectColor": MessageLookupByLibrary.simpleMessage("Выберите цвет"),
+        "setASecretCode":
+            MessageLookupByLibrary.simpleMessage("Установить секретный код"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "startTyping": MessageLookupByLibrary.simpleMessage("Начните ввод"),
         "systemThemeModeName":
@@ -130,6 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleNote": MessageLookupByLibrary.simpleMessage("Заголовок"),
         "turnsN": m5,
         "twoWeeks": MessageLookupByLibrary.simpleMessage("2 недели"),
+        "uncompleted": MessageLookupByLibrary.simpleMessage("Текущие"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Обновить"),
         "week": MessageLookupByLibrary.simpleMessage("неделя"),
         "welcomeMessageInInfo": MessageLookupByLibrary.simpleMessage(

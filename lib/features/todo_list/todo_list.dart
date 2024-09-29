@@ -7,6 +7,7 @@ import 'package:diary/generated/l10n.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class TasksListPage extends StatelessWidget {
   const TasksListPage({super.key});
@@ -40,55 +41,48 @@ class _TasksListViewState extends State<TasksListView> {
               isSticky: true,
             ),
             const TaskSearch(),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: BlocBuilder<TasksListBloc, TasksListState>(
-                builder: (context, state) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          bloc.add(
-                              const ChangeFilterEvent(filter: TaskFilter.all));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: state.taskFilter == TaskFilter.all
-                              ? Theme.of(context).colorScheme.secondary
-                              : Theme.of(context).colorScheme.primary,
-                        ),
-                        child: Text("All"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          bloc.add(const ChangeFilterEvent(
-                              filter: TaskFilter.completed));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              state.taskFilter == TaskFilter.completed
+            SizedBox(
+              height: 50,
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+                  child: BlocBuilder<TasksListBloc, TasksListState>(
+                      builder: (context, state) {
+                    return ListView.builder(
+                      scrollDirection:
+                          Axis.horizontal, // Горизонтальная прокрутка
+                      itemCount: 3, // Количество кнопок (в данном примере 3)
+                      itemBuilder: (context, index) {
+                        // Определяем фильтры и тексты для каждой кнопки
+                        final filter = [
+                          TaskFilter.all,
+                          TaskFilter.uncompleted,
+                          TaskFilter.completed,
+                        ][index];
+
+                        final filterText = [
+                          S.of(context).all,
+                          S.of(context).uncompleted,
+                          S.of(context).completed,
+                        ][index];
+
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              bloc.add(ChangeFilterEvent(filter: filter));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: state.taskFilter == filter
                                   ? Theme.of(context).colorScheme.secondary
                                   : Theme.of(context).colorScheme.primary,
-                        ),
-                        child: Text("Completed"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          bloc.add(const ChangeFilterEvent(
-                              filter: TaskFilter.uncompleted));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              state.taskFilter == TaskFilter.uncompleted
-                                  ? Theme.of(context).colorScheme.secondary
-                                  : Theme.of(context).colorScheme.primary,
-                        ),
-                        child: Text("Uncompleted"),
-                      ),
-                    ],
-                  );
-                },
-              ),
+                            ),
+                            child: Text(filterText),
+                          ),
+                        );
+                      },
+                    );
+                  })),
             ),
             Expanded(
               child: SizedBox(
@@ -114,11 +108,16 @@ class _TasksListViewState extends State<TasksListView> {
                       return Center(
                           child: Padding(
                         padding: const EdgeInsets.all(50.0),
-                        child: Align(
-                          child: Text(
-                            S.of(context).emptyTasksList,
-                            textAlign: TextAlign.center,
-                          ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/images/todo.svg',
+                                semanticsLabel: 'ToDo'),
+                            Text(
+                              S.of(context).emptyTasksList,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ));
                     }
@@ -135,9 +134,18 @@ class _TasksListViewState extends State<TasksListView> {
                       );
                     } else {
                       return Center(
-                          child: Text(
-                        S.of(context).tasksNotFound,
-                      ));
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/images/todo.svg',
+                                semanticsLabel: 'ToDo'),
+                            Text(
+                              S.of(context).tasksNotFound,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      );
                     }
                   }
                   return const SizedBox();

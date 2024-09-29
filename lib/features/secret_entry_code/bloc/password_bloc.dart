@@ -58,6 +58,7 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         emit(state.copyWith(status: PasswordStatus.success));
       } else {
         emit(state.copyWith(status: PasswordStatus.validationFailure));
+        emit(state.copyWith(status: PasswordStatus.validation));
       }
     });
   }

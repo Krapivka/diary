@@ -38,6 +38,10 @@ ThemeData lightTheme = ThemeData(
       selectionHandleColor: Palette.primaryAccent,
       selectionColor: Palette.primaryAccent,
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+      foregroundColor: Palette.primaryDark,
+    )),
     //scaffoldBackgroundColor: Palette.backgroundLight,
 
     // appBarTheme: const AppBarTheme(
@@ -77,6 +81,10 @@ ThemeData darkTheme = ThemeData(
     // appBarTheme: const AppBarTheme(
     //   color: Palette.primaryDark,
     // ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+      foregroundColor: Palette.primaryLight,
+    )),
     appBarTheme: const AppBarTheme(backgroundColor: Palette.backgroundDark),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
         shape: CircleBorder(), backgroundColor: Palette.primaryAccent),
